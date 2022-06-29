@@ -17,22 +17,60 @@
     <main>
         <h2>Resolviendo formulas geometricas sencillas con JavaScript</h2>
         <section>
-            <article>
+
+            <article class="cuadrado">
+                <h3>Cuadrado</h3>
                 <form action="">
                     <label for="inputCuadrado">
                         Escribe cuanto miden los lados de tu cuadrado:
                     </label>
                     <input id="inputCuadrado" type="number" value="555">
-                    <button type="button" onclick="calcularPerimetroCuadrado()">
+                    <button class="button button-perimetro" type="button" onclick="calcularPerimetroCuadrado()">
                         Calcular perimetro
                     </button>
-                    <button type="button" onclick="calcularAreaCuadrado()">
+                    <button class="button button-area" type="button" onclick="calcularAreaCuadrado()">
                         Calcular Area
-                    </button>
-                    
+                    </button>  
                 </form>
             </article>
             
+            <article class="triangulo">
+                <h3>Triangulo</h3>
+                <form>
+
+                    <label class="ladoA">Escribe cuanto mide el primer lado de tu triangulo: <input type="number" id="ladoA" name="ladoA"></label>
+
+                    <label class="ladoB">Escribe cuanto mide el segundo lado de tu triangulo: <input type="number" id="ladoB" name="ladoB"></label>
+
+                    <label class="base">Escribe cuanto mide la base de tu triangulo: <input type="number" id="base" name="base"></label>
+
+                    <button class="button-perimetro button" type="button" onclick="calcularPerimetroTriangulo()">
+                        Calcular perimetro
+                    </button>
+
+                    <button class="button-area button" type="button" onclick="calcularAreaTriangulo()">
+                        Calcular area de triangulo isósceles
+                    </button>
+
+                    <button class="button-area button" type="button" onclick="calcularAlturaTriangulo()">
+                        Calcular altura triangulo isósceles
+                    </button>
+                    
+                </form>
+
+            </article>
+                <h3>Circulo</h3>
+                <form action="">
+                    <label for="radio">Escribe el radio de tu circulo: <input type="number" id="radio" name="radio"></label>
+
+                    <button type="button" onclick="calcularPerimetroCirculo()" class="button button-perimetro" >Calcular perimetro</button>
+
+                    <button type="button" onclick="calcularAreaCirculo()" class="button button-area" >Calcular area</button>
+                </form>
+
+            <article class="circulo">
+
+            </article>
         </section>
     </main>
 
