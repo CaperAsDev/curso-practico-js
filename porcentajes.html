@@ -7,9 +7,44 @@
     <title>Porcentaje</title>
 </head>
 <body>
-    <h1>Porcentajes y descuentos</h1>
-    
+    <header>
 
+        <h1>Porcentajes y descuentos</h1>
+        <p>Segun taller practico del curso practico de JavaScript</p>
+    </header>
+    <main>
+        <section>
+            <h2>¿Cuanto me ahorro si compro con descuento?</h2>
+            <form action="">
+
+                <label for="precio">Cuanto vale el producto sin descuento?
+                    <input id="precio" name="precio" type="number">
+                </label>
+
+                <label for="descuento">¿Cual es el porcentaje de descuento del producto? <input type="number" id="descuento" name="descuento"></label>
+
+                <button type="button" onclick="miAhorro()">Mi ahorro</button>
+
+                <div id="resultado"></div>
+            </form>
+        </section>
+        <section>
+            <h2>¿Cúal me sale mas barato?</h2>
+            <form action="">
+
+                <label for="peso">¿Cuantos g/ml contiene?<input type="number" name="peso" id="peso"></label>
+                
+                <label for="precioProducto">¿Cuanto cuesta?<input type="number" name="precio" id="precioProducto"></label>
+
+                <button type="button" onclick="precioPorUnidad()">¿Cuanto cuesta?</button>
+
+                <div>
+                    <p>El precio por unidad de tu producto es: <span id="precioUnidad"></span></p>
+                    
+                </div>
+            </form>
+            </section>
+    </main>
 
     <script src="./porcentajes.js"></script>
 </body>
