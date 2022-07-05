@@ -1,4 +1,3 @@
-console.log("aqui vamos con en el segundo taller");
 
 //fase de variables fijas
 
@@ -8,13 +7,13 @@ console.log("aqui vamos con en el segundo taller");
     const porcentajePrecioConDescuento = 100 - descuento;
     const precioConDescuento = (precioOriginal * porcentajePrecioConDescuento) / 100;
 
-    console.log("el precio original es" + precioOriginal);
-    console.log({
-        precioOriginal,
-        descuento,
-        porcentajePrecioConDescuento,
-        precioConDescuento
-    })
+    // console.log("el precio original es" + precioOriginal);
+    // console.log({
+    //     precioOriginal,
+    //     descuento,
+    //     porcentajePrecioConDescuento,
+    //     precioConDescuento
+    // })
 
 //Conviertiendo en funcion
 
@@ -58,9 +57,46 @@ console.log("aqui vamos con en el segundo taller");
             parrafoRespuesta.innerText = `El precio original de tu producto era de $${precio},  con el descuento del ${descuento}% tu producto cuesta $${precioAPagar}, asi que ahorraste $${ahorro}!!.` */
     }
 
-    /* Ahora haremos una formula para saber que producto cuesta mas relacion peso/precio */
+//Haciendo funcionar los cupones
+    var cupones = [
+                {codigo:"abcdefg", discount: 5},
+                {codigo: "anime", discount:10},
+                {codigo:"manga", discount: 15},
+                {codigo:"capicode", discount:20}
+                ];
+    function cuponValidation(){
+        // alert("si funciona");
 
-        function calculo (pesoProducto, precioProducto){
+        const cuponCaja = document.getElementById("cupon");
+        var codigoCupon = cuponCaja.value
+        console.log(codigoCupon);
+    
+        var validado = false;
+        let i = 0;
+        while (i < cupones.length) {
+            console.log(i);
+            if(codigoCupon == cupones[i].codigo){
+                validado = true
+                console.log(validado);
+                console.log(cupones[i].discount);
+            }
+            else{
+                console.log(validado);
+                i++
+            }
+            
+            if(validado == true){
+                alert("tu cupon es valido por " + cupones[i].discount + "% de descuento");
+                i = cupones.length
+               
+            }
+        }
+
+    };
+
+/* Ahora haremos una formula para saber que producto cuesta mas relacion peso/precio */
+
+    function calculo (pesoProducto, precioProducto){
 
             var relacion = precioProducto / pesoProducto;
             relacion = relacion.toFixed(2);
@@ -69,9 +105,9 @@ console.log("aqui vamos con en el segundo taller");
 
             cajaResultado.innerText= `$${relacion}`;
 
-        }
+        };
 
-        function precioPorUnidad (quePaso){
+    function precioPorUnidad (quePaso){
 
             const cajaPrecio = document.getElementById("precioProducto");
             
@@ -86,6 +122,8 @@ console.log("aqui vamos con en el segundo taller");
 
             console.log(precioProducto);
 
-            return relacion;
+            return calculando;
 
-        }
+    };
+
+
