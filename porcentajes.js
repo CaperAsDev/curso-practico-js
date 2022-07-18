@@ -90,8 +90,21 @@
                 i = cupones.length
                
             }
+        
+        }
+        if (validado == false){
+            alert("tu cupon: `" + codigoCupon + "´ no es valido. Intenta con otro codigo.")
         }
 
+        //el codigo de abajo funciona para arrays normales no objetos y su uso va enfocado en detectar inicialmente los errores antes de ejecutar todo el codigo; algo asi como que si en el primer momento sabes que no esta correcta la informacion le avisas al usuario y no hacer todo el codigo para al final descbrir que el input estaba mal
+        //.. auque seguro hay forma de hacerlo funcionar dentro de objetos con una funcion o un ciclo que recorra... En este caso ya que estoy usando una validacion no necesito de este metodo.
+
+             /* if(!cupones.codigo.includes(codigoCupon)){
+            alert("tu cupon: " + codigoCupon + " no es valido. Intenta con otro codigo.")
+            } */
+
+        /* forma para validar si se encuentra un parametro en un array de objetos */
+            /* Usando la funcion array.find() para ver mejor como funciona esta funcion ver archivo de arrayObject en carpeta de JsBasic. */
     };
 
 /* Ahora haremos una formula para saber que producto cuesta mas relacion peso/precio */
