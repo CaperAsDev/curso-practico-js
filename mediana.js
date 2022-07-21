@@ -4,7 +4,7 @@
 
     //El metodo sort funciona correctamente para ordenar numeros si se implmementa junto a una funcion de comparacion, de otro modo solo tendra en cuenta el primer digito al momento de organizar siendo 100 menor a 20 en este caso.
 
-    const lista2 = [1, 100, 50, 222, 13, 82, 73,0,5,33,500,8];//.sort((a, b) => a - b); //---> asi se ordena la lista en el instante que se declara, pero para entender como funciona vamos a usar la version larga
+    const lista2 = [1, 100, 50, 222, 13, 82, 73,0,5,33,500];//.sort((a, b) => a - b); //---> asi se ordena la lista en el instante que se declara, pero para entender como funciona vamos a usar la version larga
 
 // Asi se ordena una lista usando una funcion como parametro de .sort aplicada a la lista a ordenar
 

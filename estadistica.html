@@ -22,11 +22,17 @@
     
     <section>
         <h2>Moda</h2>
-        <p>La moda es igual al valor que mas veces se repite en la lista de datos; sea un numero, nombre, etc.</p>
+        <p>La moda es igual al valor que mas veces se repite en la lista de datos; sea un numero, nombre, etc.El problema es que es mas complejo de lo que suena ya que para lograr llegar a la respuesta debemos pasar por varios pasos:</p>
+        <ul>
+            <li>Primero debemos recorrer la lista e ir contando cuantas veces aparece cada dato en la lista. Esto se muestra en un objeto donde cada dato sera la clave y la veces que aparece sera el valor. </li>
+            <li>Luego debemos ordenas los elementos del objeto acorde a los valores.</li>
+            <li>Luego de ordenar los elementos por valor, seleccionamos el ultimo si es en orden ascendente, asi tendremos la clave que indica que dato fue y el valor que indica cuantas veces estuvo en la lista. </li>
+        </ul>
     </section>
     
 
     <script src="./promedio.js"></script>
     <script src="./mediana.js"></script>
+    <script src="./moda.js"></script>
 </body>
 </html>
