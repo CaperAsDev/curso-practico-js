@@ -1,0 +1,115 @@
+:root{
+    --main:#D22779;
+    --secondary:#7C83FD;
+    --accent:#1DB9C3;
+    --background-ligth:#FFE3FE;
+    --background-dark:#393E46;
+    --text-dark:#222831;
+    --text-light:#E3E3E3;
+}
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+header{
+    width: 100%;
+    height: auto;
+    background-color: var(--background-ligth);
+}
+h1{
+    padding: 10px 0;
+    text-align: center;
+    color: var(--main);
+    font-weight: bolder;
+}
+main{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+h2{
+    height: auto;
+    padding: 10px 0;
+    text-align: center;
+    color: var(--secondary);
+    margin-bottom: 30px;
+}
+h3{
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--accent);
+}
+section{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 32%;
+    background-color: var(--background-ligth);
+    border-radius: 20px;
+}
+form{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+label{
+    text-align: center;
+    margin-bottom: 10px;
+}
+input{
+    margin: 5px;
+    width: 70px;
+    border-radius: 5px;
+    color: var(--main);
+    text-align: center;
+}
+.input--text{
+    width: 120px;
+}
+input:focus{
+    border: none;
+    outline-width: 2px;
+    outline-style: solid;
+}
+.answer{
+    width: 80%;
+    height: 130px;
+    background-color: var(--background-dark);
+    border-radius: 5px;
+    padding: 8px;
+    margin: 10px 0;
+    box-shadow: 2px 2px 2px var(--accent);
+}
+.answer__text{
+    color: var(--text-light);
+    text-align: center;
+}
+.answer__text--big{
+    color: var(--accent);
+    font-size: 30px;
+    font-weight: bold;
+}
+.text--small{
+    font-size: 12px;
+    color: var(--accent);
+}
+b{
+    color: var(--accent);
+}
+button{
+    padding: 8px;
+    margin: 10px 0;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    border-radius: 20px;
+    cursor: pointer;
+    word-wrap: break-word;
+    box-shadow: 2px 2px 2px var(--background-dark);
+}
+button:hover{
+    transform: scale(110%);
+}

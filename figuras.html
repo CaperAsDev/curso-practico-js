@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./figuras.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet"> 
     <title>figures</title>
 </head>
 
@@ -16,61 +20,77 @@
     </header>
     <main>
         <h2>Resolviendo formulas geometricas sencillas con JavaScript</h2>
-        <section>
+        <section class="figures-container">
 
             <article class="cuadrado">
-                <h3>Cuadrado</h3>
+                <h3>Cuadrado 🟥</h3>
                 <form action="">
                     <label for="inputCuadrado">
-                        Escribe cuanto miden los lados de tu cuadrado:
+                        Los lados de tu cuadrado miden:
+                        <input id="inputCuadrado" type="number" placeholder="cm"> cm.
                     </label>
-                    <input id="inputCuadrado" type="number" value="555">
-                    <button class="button button-perimetro" type="button" onclick="calcularPerimetroCuadrado()">
-                        Calcular perimetro
-                    </button>
-                    <button class="button button-area" type="button" onclick="calcularAreaCuadrado()">
-                        Calcular Area
-                    </button>  
+
+                    <div class="answer-square answer"></div>
+                    
+                    <div class="button-container">
+                        <button class="button button-perimetro" type="button" onclick="calcularPerimetroCuadrado()">
+                            Calcular perimetro
+                        </button>
+                        <button class="button button-area" type="button" onclick="calcularAreaCuadrado()">
+                            Calcular Area
+                        </button>  
+                    </div>
+                    
                 </form>
+                <button class="button button--red" onclick="resetAnswerSquare()">Reset</button>
             </article>
             
             <article class="triangulo">
-                <h3>Triangulo</h3>
+                <h3>Triangulo 🔺</h3>
                 <form>
+                    <label class="ladoA">Lado #1 de tu triangulo mide: <input type="number" id="ladoA" name="ladoA" placeholder="cm">cm.</label>
 
-                    <label class="ladoA">Escribe cuanto mide el primer lado de tu triangulo: <input type="number" id="ladoA" name="ladoA"></label>
+                    <label class="ladoB">Lado #2 de tu triangulo mide: <input type="number" id="ladoB" name="ladoB" placeholder="cm">cm.</label>
 
-                    <label class="ladoB">Escribe cuanto mide el segundo lado de tu triangulo: <input type="number" id="ladoB" name="ladoB"></label>
+                    <label class="base">La base de tu triangulo mide: <input type="number" id="base" name="base" placeholder="cm">cm.</label>
 
-                    <label class="base">Escribe cuanto mide la base de tu triangulo: <input type="number" id="base" name="base"></label>
+                    <div class="answer-triangle answer"></div>
 
-                    <button class="button-perimetro button" type="button" onclick="calcularPerimetroTriangulo()">
-                        Calcular perimetro
-                    </button>
-
-                    <button class="button-area button" type="button" onclick="calcularAreaTriangulo()">
-                        Calcular area de triangulo isósceles
-                    </button>
-
-                    <button class="button-area button" type="button" onclick="calcularAlturaTriangulo()">
-                        Calcular altura triangulo isósceles
-                    </button>
-                    
+                    <div class="button-container">
+                        <button class="button-perimetro button" type="button" onclick="calcularPerimetroTriangulo()">
+                            Calcular perimetro
+                        </button>
+                        
+                        <button class="button-area button" type="button" onclick="calcularAreaTriangulo()">
+                            Calcular area de triangulo isósceles
+                        </button>
+                        
+                        <button class="button-area button" type="button" onclick="calcularAlturaTriangulo()">
+                            Calcular altura triangulo isósceles
+                        </button>
+                    </div>
                 </form>
-
+                <button class="button button--red" onclick="resetAnswerTriangle()">Reset</button>
             </article>
-                <h3>Circulo</h3>
-                <form action="">
-                    <label for="radio">Escribe el radio de tu circulo: <input type="number" id="radio" name="radio"></label>
-
-                    <button type="button" onclick="calcularPerimetroCirculo()" class="button button-perimetro" >Calcular perimetro</button>
-
-                    <button type="button" onclick="calcularAreaCirculo()" class="button button-area" >Calcular area</button>
-                </form>
 
             <article class="circulo">
+                <h3>Circulo ⭕️</h3>
+                <form action="">
 
+                    <label for="radio">El radio de tu circulo mide: <input type="number" id="radio" name="radio" placeholder="cm">cm.</label>
+
+                    <div class="answer-circle answer"></div>
+
+                    <div class="button-container">
+                        <button type="button" onclick="calcularPerimetroCirculo()" class="button button-perimetro" >Calcular perimetro</button>
+                        
+                        <button type="button" onclick="calcularAreaCirculo()" class="button button-area" >Calcular area</button>
+                    </div>
+                    
+                </form>
+                <button class="button button--red" onclick="resetAnswerCircle()">Reset</button>
             </article>
+
         </section>
     </main>
 

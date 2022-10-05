@@ -1,100 +1,115 @@
 
-//fase de variables fijas
+//!fase de variables fijas
 
+ /*   
     const precioOriginal = 120;
     const descuento = 18;
 
     const porcentajePrecioConDescuento = 100 - descuento;
     const precioConDescuento = (precioOriginal * porcentajePrecioConDescuento) / 100;
 
-    // console.log("el precio original es" + precioOriginal);
-    // console.log({
-    //     precioOriginal,
-    //     descuento,
-    //     porcentajePrecioConDescuento,
-    //     precioConDescuento
-    // })
+    console.log("el precio original es" + precioOriginal);
+    console.log({
+        precioOriginal,
+        descuento,
+        porcentajePrecioConDescuento,
+        precioConDescuento
+    }) */
 
-//Conviertiendo en funcion
+//!Conviertiendo en funcion
+const parrafoResultado = document.getElementById("resultado");
 
-    function calcularPrecioConDescuento(precio, descuento){
-        var porcentajeAPagar = 100 - descuento;
-        var precioAPagar = (precio * porcentajeAPagar) / 100;
-        var ahorro = precio - precioAPagar;
-        ahorro = ahorro.toFixed(2);
-         
-          //pasando la informacion al usuario en HTML
-
-            const parrafoResultado = document.getElementById("resultado");
+function calcularPrecioConDescuento(precio, descuento){
+    const porcentajeAPagar = 100 - descuento;
+    const precioAPagar = (precio * porcentajeAPagar) / 100;
+    let ahorro = precio - precioAPagar;
+    ahorro = ahorro.toFixed(2);
         
-            parrafoResultado.innerHTML = `<p>El precio original de tu producto era de <b>$${precio}</b>,  con el descuento del <b>${descuento}%</b> tu producto cuesta <b>$${precioAPagar}</b>, asi que ahorraste <b>$${ahorro}</b>!!.</p>`;
+    //*pasando la informacion al usuario en HTML
 
-                /* Con innerHTML podemos agregar etiquetas dentro de la etiqueta referida--
+        parrafoResultado.innerHTML = `<p class="answer__text">El precio original de tu producto era de <b>$${precio}</b>,  con el descuento del <b>${descuento}%</b> tu producto cuesta <b>$${precioAPagar}</b>, asi que ahorraste <b>$${ahorro}</b>!!.</p>`;
 
-                Con innerText podemos agregar texto a la etiqueta referido (preferiblemente usarla en etiquetas de texto creo yo).*/
-    }
+            /* 
+            ?Con innerHTML podemos agregar etiquetas dentro de la etiqueta referida--
 
-//Conectando con el HTML
+            ?Con innerText podemos agregar texto a la etiqueta referido (preferiblemente usarla en etiquetas de texto creo yo).*/
+}
 
-    function miAhorro (quePasa){
+//!Conectando con el HTML
+const cajaPrecio = document.getElementById("precio");
+const cuponCaja = document.getElementById("cupon");
+const cajaDescuento = document.getElementById("descuento");
+const respuestaCupon = document.querySelector('.cupon-answer');
 
-        const cajaPrecio = document.getElementById("precio");
-        var precio = parseInt(cajaPrecio.value);
+let descuento;
+let precio;
 
-        const cajaDescuento = document.getElementById("descuento");
-        var descuento = parseInt(cajaDescuento.value);
+cajaDescuento.addEventListener('input', ()=>{
+    cuponCaja.value='';
+    respuestaCupon.innerText= '';
+})
 
-        const precioFinal = calcularPrecioConDescuento(precio, descuento);
+// !Haciendo funcionar el enter para activar los botones
+cuponCaja.addEventListener('focus',agreagarEventoEnterCupon);
+cuponCaja.addEventListener('blur', ()=>{
+    cuponCaja.removeEventListener('focus', agreagarEventoEnterCupon)
+})
+cajaDescuento.addEventListener('focus', ()=>{
+    agreagarEventoEnter(miAhorro);
+});
+function agreagarEventoEnter (activatingFunction){
+    this.addEventListener('keydown', (event)=> {
+        if(event.keyCode === 13){
+            activatingFunction();
+        };
+    });
+};
+function agreagarEventoEnterCupon (){
+    this.addEventListener('keydown', (event)=> {
+        if(event.keyCode === 13){
+            cuponValidation();
+        };
+    });
+};
 
-        console.log("la variable precio es un: " + typeof(precio));
+function miAhorro (){
+    precio = parseInt(cajaPrecio.value);
+    descuento = parseInt(cajaDescuento.value);
 
-        console.log(calcularPrecioConDescuento);
-        console.log(quePasa);
+    if(!precio || !descuento){
+        parrafoResultado.innerHTML = `<p class="answer__text">Asegurate de ingresar el precio y descuento antes de ejecutar el programa 💀.</p>`;
+        return
+    };
+    if(descuento > 100){
+        respuestaCupon.innerText= 'felicidades, estas en el mundo al revés!!'
+        parrafoResultado.innerHTML = `<p class="answer__text">Tu porcentaje de descuento es increible, que suerte tienes!!🥳.</p>`;
+        return
+    };
 
+    calcularPrecioConDescuento(precio, descuento);
+}
 
-           /*  const parrafoRespuesta = document.getElementById("resultado");
+//!Haciendo funcionar los cupones
+let cupones = [
+    {codigo:"abcdefg", discount: 5},
+    {codigo: "anime", discount:10},
+    {codigo:"manga", discount: 15},
+    {codigo:"capicode", discount:20}
+    ];
 
-            parrafoRespuesta.innerText = `El precio original de tu producto era de $${precio},  con el descuento del ${descuento}% tu producto cuesta $${precioAPagar}, asi que ahorraste $${ahorro}!!.` */
-    }
+function cuponValidation(){
 
-//Haciendo funcionar los cupones
-    var cupones = [
-                {codigo:"abcdefg", discount: 5},
-                {codigo: "anime", discount:10},
-                {codigo:"manga", discount: 15},
-                {codigo:"capicode", discount:20}
-                ];
-    function cuponValidation(){
-        // alert("si funciona");
-
-        const cuponCaja = document.getElementById("cupon");
-        var codigoCupon = cuponCaja.value
-        console.log(codigoCupon);
-    
-        var validado = false;
-        let i = 0;
-        while (i < cupones.length) {
-            console.log(i);
-            if(codigoCupon == cupones[i].codigo){
-                validado = true
-                console.log(validado);
-                console.log(cupones[i].discount);
-            }
-            else{
-                console.log(validado);
-                i++
-            }
-            
-            if(validado == true){
-                alert("tu cupon es valido por " + cupones[i].discount + "% de descuento");
-                i = cupones.length
-               
-            }
-        
-        }
-        if (validado == false){
-            alert("tu cupon: `" + codigoCupon + "´ no es valido. Intenta con otro codigo.")
-        }
+    let codigoCupon = cuponCaja.value
+    let indiceCodigo = cupones.findIndex((elm)=> elm.codigo == codigoCupon);
+    if(indiceCodigo >= 0){
+        descuento = cupones[indiceCodigo].discount;
+        cajaDescuento.value = descuento;
+        respuestaCupon.innerText= 'Tu cupon fue validado con Exito.'
+    }else{
+        respuestaCupon.innerText= 'Tu cupon NO es valido.'
+        parrafoResultado.innerHTML='';
+        cajaDescuento.value= '';
+    };
 
         //el codigo de abajo funciona para arrays normales no objetos y su uso va enfocado en detectar inicialmente los errores antes de ejecutar todo el codigo; algo asi como que si en el primer momento sabes que no esta correcta la informacion le avisas al usuario y no hacer todo el codigo para al final descbrir que el input estaba mal
         //.. auque seguro hay forma de hacerlo funcionar dentro de objetos con una funcion o un ciclo que recorra... En este caso ya que estoy usando una validacion no necesito de este metodo.
@@ -107,36 +122,34 @@
             /* Usando la funcion array.find() para ver mejor como funciona esta funcion ver archivo de arrayObject en carpeta de JsBasic. */
     };
 
-/* Ahora haremos una formula para saber que producto cuesta mas relacion peso/precio */
+/* 
+!Ahora haremos una formula para saber que producto cuesta mas relacion peso/precio */
 
-    function calculo (pesoProducto, precioProducto){
+function calculo (pesoProducto, precioProducto){
 
-            var relacion = precioProducto / pesoProducto;
-            relacion = relacion.toFixed(2);
+    var relacion = precioProducto / pesoProducto;
+    relacion = relacion.toFixed(2);
 
-            const cajaResultado = document.getElementById("precioUnidad");
+    const cajaResultado = document.getElementById("precioUnidad");
 
-            cajaResultado.innerText= `$${relacion}`;
+    cajaResultado.innerText= `$${relacion}`;
 
-        };
+};
 
-    function precioPorUnidad (quePaso){
+function precioPorUnidad (quePaso){
+    const cajaPrecio = document.getElementById("precioProducto");
+    
+    var precioProducto = parseInt (cajaPrecio.value);
+    precioProducto = precioProducto.toFixed(2);
 
-            const cajaPrecio = document.getElementById("precioProducto");
-            
-            var precioProducto = parseInt (cajaPrecio.value);
-            precioProducto = precioProducto.toFixed(2);
+    const cajaPeso = document.getElementById("peso");
+    var pesoProducto = parseInt (cajaPeso.value);
+    pesoProducto = pesoProducto.toFixed(2);
 
-            const cajaPeso = document.getElementById("peso");
-            var pesoProducto = parseInt (cajaPeso.value);
-            pesoProducto = pesoProducto.toFixed(2);
+    const calculando = calculo(pesoProducto, precioProducto);
 
-           const calculando = calculo(pesoProducto, precioProducto);
+    return calculando;
 
-            console.log(precioProducto);
-
-            return calculando;
-
-    };
+};
 
 
