@@ -4,33 +4,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="estadistica.css">
+
     <title>Estadistica</title>
 </head>
 <body>
+    <header>
+        <h1>Herramientas estadisticas con JavaScript</h1>
+    </header>
+    <main>
 
-    <h1>Herramientas estadisticas con JavaScript</h1>
-    
-    <section>
-        <h2>Promedio</h2>
-        <p>El promedio se obtiene sumando todos los valores y dividiendo el resultado entre la canticad de datos.</p>
-    </section>
-    
-    <section>
-        <h2>Mediana</h2>
-        <p>Para obtener la mediana debemos ordenar de mayor a menor o de menor a mayor los datos, luego se toma el numero que esta en la mitad y esa seria la mediana, si hay dos numeros en la mitad(la cantidad de datos es un numero par)se le saca promedio a estos.</p>
-    </section>
-    
-    <section>
-        <h2>Moda</h2>
-        <p>La moda es igual al valor que mas veces se repite en la lista de datos; sea un numero, nombre, etc.El problema es que es mas complejo de lo que suena ya que para lograr llegar a la respuesta debemos pasar por varios pasos:</p>
-        <ul>
-            <li>Primero debemos recorrer la lista e ir contando cuantas veces aparece cada dato en la lista. Esto se muestra en un objeto donde cada dato sera la clave y la veces que aparece sera el valor. </li>
-            <li>Luego debemos ordenas los elementos del objeto acorde a los valores.</li>
-            <li>Luego de ordenar los elementos por valor, seleccionamos el ultimo si es en orden ascendente, asi tendremos la clave que indica que dato fue y el valor que indica cuantas veces estuvo en la lista. </li>
-        </ul>
-    </section>
-    
+        <section class="promedio">
+            <div class="tool__header">
+                <h2 class="header__title">Promedio</h2>
+                <p class="header__text">El promedio se obtiene sumando todos los valores y dividiendo el resultado entre la canticad de datos.</p>
+            </div>
+            <form class="application">
+                <label for="dato">Ingresa un nuevo dato a la lista para promediar
+                </label>
+                <input id="dato" type="number">
+                <button class="button submit" onclick="datoNuevoPromedio()">Ingresar</button>
+                <button class="button button--accent promediar" onclick="promediando(listaUsuarioPromedio)">Promediar</button>
 
+            </form>
+            <div class="list-container">
+                <ul class="list">
+                    
+                </ul>
+                <div class="answer respuesta-promedio"></div>
+            </div>
+            <button class="button button--red reset--button" onclick="resetContentPromedio()">Reset</button>
+        </section>
+        
+        <section class="mediana">
+            <div class="tool__header">
+                <h2>Mediana</h2>
+                <p>Para obtener la mediana debemos ordenar los datos, luego se toma el numero que esta en la mitad y esa seria la mediana, si hay dos numeros en la mitad(la cantidad de datos es un numero par)se le saca promedio a estos.</p>
+            </div>
+            <form class="application">
+                <label for="dato-mediana">Ingresa un nuevo dato a la lista
+                </label>
+                <input id="dato-mediana" type="number">
+
+                <button class="button submit-mediana" onclick="ingresarDatoMediana()">Ingresar</button>
+                
+                <button class="button button--accent mediana" onclick="encontrarMediana(listaDatosMediana)">Mediana</button>
+
+            </form>
+            <div class="list-container">
+                <ul class="list ulMediana">
+                    
+                </ul>
+                <div class="answer respuesta-mediana"></div>
+            </div>
+            <button class="button button--red reset--button" onclick="resetContentMediana()">Reset</button>
+        </section>
+        
+       <!--  <section>
+            <h2>Moda</h2>
+            <p>La moda es igual al valor que mas veces se repite en la lista de datos; sea un numero, nombre, etc.El problema es que es mas complejo de lo que suena ya que para lograr llegar a la respuesta debemos pasar por varios pasos:</p>
+            <ul>
+                <li>Primero debemos recorrer la lista e ir contando cuantas veces aparece cada dato en la lista. Esto se muestra en un objeto donde cada dato sera la clave y la veces que aparece sera el valor. </li>
+                <li>Luego debemos ordenas los elementos del objeto acorde a los valores.</li>
+                <li>Luego de ordenar los elementos por valor, seleccionamos el ultimo si es en orden ascendente, asi tendremos la clave que indica que dato fue y el valor que indica cuantas veces estuvo en la lista. </li>
+            </ul>
+        </section> -->
+    </main>
+        
+        
     <script src="./promedio.js"></script>
     <script src="./mediana.js"></script>
     <script src="./moda.js"></script>

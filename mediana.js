@@ -5,55 +5,70 @@
     //El metodo sort funciona correctamente para ordenar numeros si se implmementa junto a una funcion de comparacion, de otro modo solo tendra en cuenta el primer digito al momento de organizar siendo 100 menor a 20 en este caso.
 
     const lista2 = [1, 100, 50, 222, 13, 82, 73,0,5,33,500];//.sort((a, b) => a - b); //---> asi se ordena la lista en el instante que se declara, pero para entender como funciona vamos a usar la version larga
+//!Traigo mis etiquetas de HTML
+const inputDatoMediana = document.querySelector('#dato-mediana');
+const botonSubmitMediana = document.querySelector('.submit-mediana');
+const botonCalcularMediana = document.querySelector('.mediana');
+const ulMediana = document.querySelector('.ulMediana');
+const cajaRespuestaMediana = document.querySelector('.respuesta-mediana');
 
-// Asi se ordena una lista usando una funcion como parametro de .sort aplicada a la lista a ordenar
 
-    console.group("ordenando lista");
+botonSubmitMediana.addEventListener('click', (event)=> event.preventDefault());
+botonCalcularMediana.addEventListener('click', (event)=> event.preventDefault());
+//! Creo mis variables
+let listaDatosMediana = [];
 
-         function compareNumbers (a, b){
-            console.log(`esto es a: ${a}`);
-            console.log(`esto es b: ${b}`);
-            console.log(a - b);
-            return a - b;
-        }
+//! Asi se ordena una lista usando una funcion como parametro de .sort aplicada a la lista a ordenar
 
-        lista2.sort(compareNumbers);
-    
-        console.log(`Asi se ve la lista ordenada: ${lista2}.`);
+console.group("ordenando lista");
+function ingresarDatoMediana (){
+    // listaDatosMediana.sort(compareNumbers);
+    ingresarDatoNuevo(inputDatoMediana,listaDatosMediana,ulMediana);
+}
 
-    console.groupEnd;
+function compareNumbers (a, b){
+    console.log(`esto es a: ${a}`);
+    console.log(`esto es b: ${b}`);
+    console.log(a - b);
+    return a - b;
+}
 
-    /* Ahora debemos diferenciar entre listas pares e impares */
+lista2.sort(compareNumbers);
 
-    function encontrarMediana (numeros){
+console.log(`Asi se ve la lista ordenada: ${lista2}.`);
 
-        if(numeros.length % 2 == 0){//Aqui basicamente dice que si el sobrante de la division entre el largo de la lista y 2 es igual a 0 la lista es par(true)
+console.groupEnd;
 
-            let posicionMedianaPar1 = numeros.length / 2;
-            let posicionMedianaPar2 = (numeros.length / 2) - 1;
+/* Ahora debemos diferenciar entre listas pares e impares */
 
-            let numerosAPromediar = [numeros[posicionMedianaPar1],numeros[posicionMedianaPar2]];
+function encontrarMediana (numeros){
 
-            let medianaDePar = promediando(numerosAPromediar);
+    if(numeros.length % 2 == 0){//Aqui basicamente dice que si el sobrante de la division entre el largo de la lista y 2 es igual a 0 la lista es par(true)
 
-            console.log(`la mediana es: ${medianaDePar}`);
-            
-            return console.log("la lista es par");
+        let posicionMedianaPar1 = numeros.length / 2;
+        let posicionMedianaPar2 = (numeros.length / 2) - 1;
 
-        }
-        
-        else{
+        let numerosAPromediar = [numeros[posicionMedianaPar1],numeros[posicionMedianaPar2]];
 
-            let posicionMedianaImpar = parseInt(numeros.length / 2);
+        let medianaDePar = (numerosAPromediar[0] + numerosAPromediar[1])/ 2;
+        cajaRespuestaMediana.innerHTML =` <p class="answer__text"> ${medianaDePar}</p>`;
 
-            let medianaDeImpar = numeros[posicionMedianaImpar];
-
-            console.log (`la mediana es: ${medianaDeImpar}`);
-
-            return console.log("la lista es impar");
-
-        }
+       return
     }
-    encontrarMediana(lista2);
-
     
+    else{
+
+        let posicionMedianaImpar = parseInt(numeros.length / 2);
+
+        let medianaDeImpar = numeros[posicionMedianaImpar];
+
+        cajaRespuestaMediana.innerHTML =` <p class="answer__text"> ${medianaDeImpar}</p>`;
+    }
+}
+function resetContentMediana(){
+    cajaRespuestaMediana.innerHTML ='';
+    ulMediana.innerHTML = '';
+    listaDatosMediana = [];
+};
+// encontrarMediana(lista2);
+

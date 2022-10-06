@@ -93,7 +93,7 @@ console.groupEnd();
 /* 
 !Aqui interactuamos con el HTML 
  */
-// *Rereteando cuadros de respuesta
+// *Reseteando cuadros de respuesta
 function resetAnswerTriangle() {respuestaTriangulo.innerHTML=''};
 function resetAnswerCircle(){respuestaCirculo.innerHTML=''};
 function resetAnswerSquare(){respuestaCuadrado.innerHTML=''};
