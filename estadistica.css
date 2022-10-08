@@ -40,7 +40,7 @@ h2{
 section{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: auto min-content 60px;
+    grid-template-rows: .6fr min-content 60px;
     grid-template-areas:
         "head head head head head head"
         "input input input list list list"
@@ -48,10 +48,10 @@ section{
     ;
     padding: 15px;
     gap: 10px;
-    /* margin: 20px; */
     width: 32%;
     background-color: var(--background-ligth);
     border-radius: 20px;
+    align-content: space-between;
 }
 .tool__header{
     grid-area: head;
@@ -160,7 +160,17 @@ button:hover{
 
 @media (max-width: 1000px){
     main{
-        flex-direction: column;
+    justify-content: center;        
+    flex-wrap: wrap;
+    }
+    section{
+        width: 47%;
+        max-width: 500px;
+    }
+}
+@media (max-width: 800px){
+    main{
+        flex-direction: row;
         align-items: center;
     }
     section{
