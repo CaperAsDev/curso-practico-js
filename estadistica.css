@@ -27,6 +27,9 @@ h1{
 main{
     display: flex;
     width: 100%;
+    height: 100vh;
+    gap: 20px;
+    padding: 10px;
 }
 h2{
     padding: 10px 0;
@@ -37,21 +40,22 @@ h2{
 section{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 1fr min-content 60px;
+    grid-template-rows: auto min-content 60px;
     grid-template-areas:
         "head head head head head head"
-        "input input input . list list"
+        "input input input list list list"
         ". . boton  boton . ." 
     ;
     padding: 15px;
     gap: 10px;
-    margin: 20px;
+    /* margin: 20px; */
     width: 32%;
     background-color: var(--background-ligth);
     border-radius: 20px;
 }
 .tool__header{
     grid-area: head;
+    height: min-content;
 }
 .application{
     grid-area: input;
@@ -64,7 +68,7 @@ section{
     max-height:205px;
 }
 .list{
-    max-height: 80%;
+    max-height: 70%;
     min-height: 50%;
     background-color: var(--background-dark);
     border-radius: 5px;
@@ -91,12 +95,15 @@ label{
     text-align: center;
     margin-bottom: 10px;
 }
-input[type="number"]{
+input{
     margin: 5px;
     width: 70px;
     border-radius: 5px;
     color: var(--main);
     text-align: center;
+}
+input[type="text"]{
+    width: 130px;
 }
 input:focus{
     border: none;
@@ -105,7 +112,8 @@ input:focus{
 }
 .answer{
     width: 100%;
-    height: 40px;
+    min-height: 40px;
+    max-height: 80px;
     margin-top: 5px;
     background-color: var(--background-dark);
     border-radius: 5px;
@@ -116,6 +124,9 @@ input:focus{
 .answer__text{
     color: var(--text-light);
     text-align: center;
+}
+.text--red{
+    background-color: var(--main);
 }
 .button-container{
     display: flex;
@@ -145,4 +156,20 @@ button:hover{
 .button--accent{
     background-color: var(--accent);
     color:var(--background-dark);
+}
+
+@media (max-width: 1000px){
+    main{
+        flex-direction: column;
+        align-items: center;
+    }
+    section{
+        width: 70%;
+        max-width: 500px;
+    }
+}
+@media (max-width: 640px){
+    section{
+        width: 90%;
+    }
 }

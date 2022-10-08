@@ -1,3 +1,79 @@
+//!Inportando inputs
+const inputDatoModa = document.querySelector('#dato-moda');
+const botonSubmitModa = document.querySelector('.submit-moda');
+const botonCalcularModa = document.querySelector('.moda');
+const ulModa = document.querySelector('.ulModa');
+const cajaRespuestaModa = document.querySelector('.respuesta-moda');
+
+
+botonSubmitModa.addEventListener('click', (event)=> event.preventDefault());
+botonCalcularModa.addEventListener('click', (event)=> event.preventDefault());
+
+//!Creo mis variables
+let listaDatosModa = [];
+
+//!ingresar datos a lista
+function ingresarDatoModa (){
+    ingresarDatoNuevoModa(inputDatoModa,listaDatosModa,ulModa);
+}
+function ingresarDatoNuevoModa(inputDeDatos,listaDeDatos,ulDedatosHtml){
+    if(inputDeDatos.value ===''){
+        alert('no ingresaste datos');
+        return
+    }
+    listaDeDatos.unshift(inputDeDatos.value);
+    ulDedatosHtml.innerHTML += `<li class="answer__text"> Dato ${listaDeDatos.length}: ${listaDeDatos[0]}</li>`;
+    inputDeDatos.value ='';
+};
+
+//!Funcion para encontrar la moda de nuestra lista
+//*Tenemos que crear una plantilla para los objetos que crearemos en el proceso de conteo de los datos
+
+class DatoNuevo {
+    constructor(datos, veces){
+        this.dato = datos;
+        this.veces = veces;
+    }
+};
+
+function encontrarModa(listaDatosModa){
+
+    const conteoDatos = listaDatosModa.reduce(function(acumulador, datos){
+        let dataExist = acumulador.some((objeto)=> {return objeto.dato == datos})
+        let indexDato = 0;
+        if(dataExist){
+            indexDato = acumulador.findIndex((element) => element.dato == datos);
+            acumulador[indexDato].veces += 1;
+        }else{
+            acumulador.unshift(new DatoNuevo(datos, 1));
+        }
+        return acumulador;
+    },[]);
+    
+    conteoDatos.sort((a, b)=>{return a.veces - b.veces});
+
+    let modas;
+    let moda;
+    if(conteoDatos[conteoDatos.length-1].veces === conteoDatos[conteoDatos.length-2].veces){
+        modas = [conteoDatos[conteoDatos.length-1], conteoDatos[conteoDatos.length-2]];
+
+        cajaRespuestaModa.innerHTML =` <p class="answer__text"> ${modas[0].dato}: ${modas[0].veces} veces</p>`;
+
+        cajaRespuestaModa.innerHTML +=` <p class="answer__text"> ${modas[1].dato}: ${modas[1].veces} veces</p>`;
+    }else{
+        moda = conteoDatos[conteoDatos.length - 1];
+        cajaRespuestaModa.innerHTML =` <p class="answer__text"> ${moda.dato}: ${moda.veces} veces</p>`;
+    }
+
+
+}
+//!funcion reset
+function resetContentModa(){
+    cajaRespuestaModa.innerHTML ='';
+    ulModa.innerHTML = '';
+    listaDatosModa = [];
+};
+
 /* Bases */
     //Tenemos nuestra lista desordenada con datos que se repiten
     const listaModa = [1, 2, 8, 3,8 , 5, 6, 1, 7, 4, 2, 1, 3, 7, 8, 3, 2, 1,"indice"];
@@ -10,11 +86,11 @@
 
         contadorDatos[dato] = (contadorDatos[dato] || 0) + 1;//Esta es la linea mas importante y la explicare a detalle a continuacion, sin embargo explicare el || antes que todo --->
 
-         /* basicamente el || divide dos situaciones como si fuera un if else, si el valor antes del || es true lo que esta luego del || no sucedera, de tal manera que si el valor antes del || es false va a suceder lo que esta luego del ||
+         /* basicamente el || evalua la primera expresión(la que esta antes del ||), si la expresión se evalua como true se devolvera esa primera sentencia, de tal manera que si el valor antes del || es false retornara la segunda sentencia: por esto mismo cuando se evalua la primera sentencia por primera vez esta es falsa y se retorna la segunda expresion que es 0. Esto mismo se podria hacer con un if si se quisiera.
          
             En nuestro caso cuando se define una nueva clave/key/propiedad en nuestro objeto se requiere darle un valor inicial y hay entra el 0 que esta luego del || sin ello nuestra clave nunca estaria definida(undefined) y no se podria contar(realizar la suma cada que aparezca nuestro dato)
             
-                Es complejo de entender pero lo mas eficiente para salir de dudas es hacer pruebas y prestar atencion a los console.log de abajo
+                Es complejo de entender pero lo mas eficiente para salir de dudas es hacer pruebas y prestar atencion a los console.log de abajo o revisar https://www.freecodecamp.org/espanol/news/operadores-logicos-javascript/
             */
 
         /* Importante notar el apunte al final sobre las llaves que definen el valor inical del acumulador como un objeto vacio.
@@ -35,14 +111,14 @@
         
     },{/* Estas llaves representan el valorInicial del acumulador, que en este caso es un objeto vacio donde luego se iran agregando los datos */});
 
-    /* Prueba 2 para ver si podemos crear un array de objetos y que cada objeto sea un numero */
+    /* 
+    !Prueba 2 para ver si podemos crear un array de objetos y que cada objeto sea un numero */
 
-    //Tenemos que crear una plantilla para los objetos que crearemos en el proceso de conteo de los datos
-
-        function datoNuevo (numero, veces){
-            this.numero = numero;
+    function datoNuevo (datos, veces) {
+            this.dato = datos;
             this.veces = veces;
-        };
+        
+    };
 
     const objetoNumeros = listaModa.reduce(function(arrayNumeros, dato){
 

@@ -24,7 +24,7 @@
                 <p class="header__text">El promedio se obtiene sumando todos los valores y dividiendo el resultado entre la canticad de datos.</p>
             </div>
             <form class="application">
-                <label for="dato">Ingresa un nuevo dato a la lista para promediar
+                <label for="dato">Ingresa un nuevo dato a la lista 
                 </label>
                 <input id="dato" type="number">
                 <button class="button submit" onclick="datoNuevoPromedio()">Ingresar</button>
@@ -64,15 +64,28 @@
             <button class="button button--red reset--button" onclick="resetContentMediana()">Reset</button>
         </section>
         
-       <!--  <section>
-            <h2>Moda</h2>
-            <p>La moda es igual al valor que mas veces se repite en la lista de datos; sea un numero, nombre, etc.El problema es que es mas complejo de lo que suena ya que para lograr llegar a la respuesta debemos pasar por varios pasos:</p>
-            <ul>
-                <li>Primero debemos recorrer la lista e ir contando cuantas veces aparece cada dato en la lista. Esto se muestra en un objeto donde cada dato sera la clave y la veces que aparece sera el valor. </li>
-                <li>Luego debemos ordenas los elementos del objeto acorde a los valores.</li>
-                <li>Luego de ordenar los elementos por valor, seleccionamos el ultimo si es en orden ascendente, asi tendremos la clave que indica que dato fue y el valor que indica cuantas veces estuvo en la lista. </li>
-            </ul>
-        </section> -->
+        <section class="moda">
+            <div class="tool__header">
+                <h2>Moda</h2>
+                <p>La moda es igual al valor que mas veces se repite en la lista de datos; sea un numero, nombre, etc. </p>
+            </div>
+            <form class="application">
+                <label for="dato-moda">Ingresa un nuevo dato a la lista
+                </label>
+                <input id="dato-moda" type="text">
+
+                <button class="button submit-moda" onclick="ingresarDatoModa()">Ingresar</button>
+                
+                <button class="button button--accent moda" onclick="encontrarModa(listaDatosModa)">Moda</button>
+            </form>
+            <div class="list-container">
+                <ul class="list ulModa">
+                    
+                </ul>
+                <div class="answer respuesta-moda"></div>
+            </div>
+            <button class="button button--red reset--button" onclick="resetContentModa()">Reset</button>
+        </section>
     </main>
         
         

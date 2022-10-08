@@ -17,6 +17,10 @@ botonSubmitMediana.addEventListener('click', (event)=> event.preventDefault());
 botonCalcularMediana.addEventListener('click', (event)=> event.preventDefault());
 //! Creo mis variables
 let listaDatosMediana = [];
+let isEven;
+let posicionMedianaPar1;
+let posicionMedianaPar2;
+let posicionMedianaImpar;
 
 //! Asi se ordena una lista usando una funcion como parametro de .sort aplicada a la lista a ordenar
 
@@ -26,12 +30,8 @@ function ingresarDatoMediana (){
     ingresarDatoNuevo(inputDatoMediana,listaDatosMediana,ulMediana);
 }
 
-function compareNumbers (a, b){
-    console.log(`esto es a: ${a}`);
-    console.log(`esto es b: ${b}`);
-    console.log(a - b);
-    return a - b;
-}
+function compareNumbers (a, b) { return a - b};
+
 
 lista2.sort(compareNumbers);
 
@@ -40,28 +40,55 @@ console.log(`Asi se ve la lista ordenada: ${lista2}.`);
 console.groupEnd;
 
 /* Ahora debemos diferenciar entre listas pares e impares */
+function printOrderedList(){
+    const orderedList = listaDatosMediana.sort(compareNumbers);
+    ulMediana.innerHTML ='';
+    console.log(orderedList);
+    if(isEven === true){
+        for (let i = 0; i < listaDatosMediana.length ; i++) {
+            if(i == posicionMedianaPar1 || i == posicionMedianaPar2){
+            ulMediana.innerHTML += `<li class="answer__text text--red">dato ${i+1} : ${orderedList[i]}</li>`
+            }else{
+                ulMediana.innerHTML += `<li class="answer__text">dato ${i+1} : ${orderedList[i]}</li>`
+            }
+        }   
+    }else{
+    
+        for (let i = 0; i < listaDatosMediana.length ; i++) {
+            
+            if(i == posicionMedianaImpar){
+            ulMediana.innerHTML += `<li class="answer__text text--red">dato ${i+1} : ${orderedList[i]}</li>`
+            }else{
+                ulMediana.innerHTML += `<li class="answer__text">dato ${i+1} : ${orderedList[i]}</li>`
+            }
+        } 
+    }
+}
 
 function encontrarMediana (numeros){
 
     if(numeros.length % 2 == 0){//Aqui basicamente dice que si el sobrante de la division entre el largo de la lista y 2 es igual a 0 la lista es par(true)
+        isEven = true;
+        numeros.sort(compareNumbers);
 
-        let posicionMedianaPar1 = numeros.length / 2;
-        let posicionMedianaPar2 = (numeros.length / 2) - 1;
+        posicionMedianaPar1 = numeros.length / 2;
+        posicionMedianaPar2 = (numeros.length / 2) - 1;
 
         let numerosAPromediar = [numeros[posicionMedianaPar1],numeros[posicionMedianaPar2]];
 
         let medianaDePar = (numerosAPromediar[0] + numerosAPromediar[1])/ 2;
+        printOrderedList();
         cajaRespuestaMediana.innerHTML =` <p class="answer__text"> ${medianaDePar}</p>`;
 
-       return
-    }
-    
-    else{
+       return;
+    }else{
+        isEven = false;
+        numeros.sort(compareNumbers);
 
-        let posicionMedianaImpar = parseInt(numeros.length / 2);
+        posicionMedianaImpar = Math.floor(numeros.length / 2);
 
         let medianaDeImpar = numeros[posicionMedianaImpar];
-
+        printOrderedList();
         cajaRespuestaMediana.innerHTML =` <p class="answer__text"> ${medianaDeImpar}</p>`;
     }
 }
