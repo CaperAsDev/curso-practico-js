@@ -1,96 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet"> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="estadistica.css">
+    <link rel="stylesheet" href="estadistica.css" />
 
     <title>Estadistica</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Herramientas estadisticas con JavaScript</h1>
+      <h1>Herramientas estadisticas con JavaScript</h1>
     </header>
     <main>
+      <section class="promedio">
+        <div class="tool__header">
+          <h2 class="header__title">Promedio</h2>
+          <p class="header__text">
+            El promedio se obtiene sumando todos los valores y dividiendo el
+            resultado entre la canticad de datos.
+          </p>
+        </div>
+        <form class="application">
+          <label for="dato">Ingresa un nuevo dato a la lista </label>
+          <input id="dato" type="number" />
+          <button class="button submit">Ingresar</button>
+          <button class="button button--accent promediar">Promediar</button>
+        </form>
+        <div class="list-container">
+          <ul class="list"></ul>
+          <div class="answer respuesta-promedio"></div>
+        </div>
+        <button class="button button--red reset--button">Reset</button>
+      </section>
 
-        <section class="promedio">
-            <div class="tool__header">
-                <h2 class="header__title">Promedio</h2>
-                <p class="header__text">El promedio se obtiene sumando todos los valores y dividiendo el resultado entre la canticad de datos.</p>
-            </div>
-            <form class="application">
-                <label for="dato">Ingresa un nuevo dato a la lista 
-                </label>
-                <input id="dato" type="number">
-                <button class="button submit" onclick="datoNuevoPromedio()">Ingresar</button>
-                <button class="button button--accent promediar" onclick="promediando(listaUsuarioPromedio)">Promediar</button>
+      <section class="mediana">
+        <div class="tool__header">
+          <h2>Mediana</h2>
+          <p>
+            Para obtener la mediana debemos ordenar los datos, luego se toma el
+            numero que esta en la mitad y esa seria la mediana, si hay dos
+            numeros en la mitad(la cantidad de datos es un numero par)se le saca
+            promedio a estos.
+          </p>
+        </div>
+        <form class="application">
+          <label for="dato-mediana">Ingresa un nuevo dato a la lista </label>
+          <input id="dato-mediana" type="number" />
 
-            </form>
-            <div class="list-container">
-                <ul class="list">
-                    
-                </ul>
-                <div class="answer respuesta-promedio"></div>
-            </div>
-            <button class="button button--red reset--button" onclick="resetContentPromedio()">Reset</button>
-        </section>
-        
-        <section class="mediana">
-            <div class="tool__header">
-                <h2>Mediana</h2>
-                <p>Para obtener la mediana debemos ordenar los datos, luego se toma el numero que esta en la mitad y esa seria la mediana, si hay dos numeros en la mitad(la cantidad de datos es un numero par)se le saca promedio a estos.</p>
-            </div>
-            <form class="application">
-                <label for="dato-mediana">Ingresa un nuevo dato a la lista
-                </label>
-                <input id="dato-mediana" type="number">
+          <button class="button submit-mediana" onclick="ingresarDatoMediana()">
+            Ingresar
+          </button>
 
-                <button class="button submit-mediana" onclick="ingresarDatoMediana()">Ingresar</button>
-                
-                <button class="button button--accent mediana" onclick="encontrarMediana(listaDatosMediana)">Mediana</button>
+          <button
+            class="button button--accent mediana"
+            onclick="encontrarMediana(listaDatosMediana)"
+          >
+            Mediana
+          </button>
+        </form>
+        <div class="list-container">
+          <ul class="list ulMediana"></ul>
+          <div class="answer respuesta-mediana"></div>
+        </div>
+        <button
+          class="button button--red reset--button"
+          onclick="resetContentMediana()"
+        >
+          Reset
+        </button>
+      </section>
 
-            </form>
-            <div class="list-container">
-                <ul class="list ulMediana">
-                    
-                </ul>
-                <div class="answer respuesta-mediana"></div>
-            </div>
-            <button class="button button--red reset--button" onclick="resetContentMediana()">Reset</button>
-        </section>
-        
-        <section class="moda">
-            <div class="tool__header">
-                <h2>Moda</h2>
-                <p>La moda es igual al valor que mas veces se repite en la lista de datos; sea un numero, nombre, etc. </p>
-            </div>
-            <form class="application">
-                <label for="dato-moda">Ingresa un nuevo dato a la lista
-                </label>
-                <input id="dato-moda" type="text">
+      <section class="moda">
+        <div class="tool__header">
+          <h2>Moda</h2>
+          <p>
+            La moda es igual al valor que mas veces se repite en la lista de
+            datos; sea un numero, nombre, etc.
+          </p>
+        </div>
+        <form class="application">
+          <label for="dato-moda">Ingresa un nuevo dato a la lista </label>
+          <input id="dato-moda" type="text" />
 
-                <button class="button submit-moda" onclick="ingresarDatoModa()">Ingresar</button>
-                
-                <button class="button button--accent moda" onclick="encontrarModa(listaDatosModa)">Moda</button>
-            </form>
-            <div class="list-container">
-                <ul class="list ulModa">
-                    
-                </ul>
-                <div class="answer respuesta-moda"></div>
-            </div>
-            <button class="button button--red reset--button" onclick="resetContentModa()">Reset</button>
-        </section>
+          <button class="button submit-moda" onclick="ingresarDatoModa()">
+            Ingresar
+          </button>
+
+          <button
+            class="button button--accent moda"
+            onclick="encontrarModa(listaDatosModa)"
+          >
+            Moda
+          </button>
+        </form>
+        <div class="list-container">
+          <ul class="list ulModa"></ul>
+          <div class="answer respuesta-moda"></div>
+        </div>
+        <button
+          class="button button--red reset--button"
+          onclick="resetContentModa()"
+        >
+          Reset
+        </button>
+      </section>
     </main>
-        
-        
-    <script src="./promedio.js"></script>
-    <script src="./mediana.js"></script>
-    <script src="./moda.js"></script>
-</body>
+
+    <script type="module" src="./main.js"></script>
+  </body>
 </html>
