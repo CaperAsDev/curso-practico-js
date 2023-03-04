@@ -38,7 +38,9 @@
           <ul class="list"></ul>
           <div class="answer respuesta-promedio"></div>
         </div>
-        <button class="button button--red reset--button">Reset</button>
+        <button id="resetPromedio" class="button button--red reset--button">
+          Reset
+        </button>
       </section>
 
       <section class="mediana">
@@ -55,25 +57,17 @@
           <label for="dato-mediana">Ingresa un nuevo dato a la lista </label>
           <input id="dato-mediana" type="number" />
 
-          <button class="button submit-mediana" onclick="ingresarDatoMediana()">
-            Ingresar
-          </button>
+          <button class="button submit-mediana">Ingresar</button>
 
-          <button
-            class="button button--accent mediana"
-            onclick="encontrarMediana(listaDatosMediana)"
-          >
-            Mediana
-          </button>
+          <button 
+					id="calcular-mediana"
+					class="button button--accent mediana">Mediana</button>
         </form>
         <div class="list-container">
           <ul class="list ulMediana"></ul>
           <div class="answer respuesta-mediana"></div>
         </div>
-        <button
-          class="button button--red reset--button"
-          onclick="resetContentMediana()"
-        >
+        <button id="resetMediana" class="button button--red reset--button">
           Reset
         </button>
       </section>
