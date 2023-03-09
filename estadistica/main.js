@@ -10,7 +10,6 @@ let listaDatosMediana = [];
 //! Variables Moda
 let listaDatosModa = [];
 
-//! se pueden hacer 3 funciones para no repetir codigo: print lis, play y reset- y solo se pasa el objeto
 // * Agregando eventos- PROMEDIO
 promedioForm.botonIngresarDatos.addEventListener("click", (event) => {
   ingresarDatoNuevo(

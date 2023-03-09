@@ -1,88 +1,124 @@
-/* Esta primera parte es basicamente para sacar la mediana de los salarios */
+import { encontrarMediana } from "../estadistica/mediana.js";
+import { encontrarModa } from "../estadistica/moda.js";
+import { promediando } from "../estadistica/promedio.js";
 
-    /* Primero filtramos con el metodo .map() la propiedad salary de nuestros objetos(personas) que estan en nuestro array colombia  */
+function encontrarPersona(nombre) {
+  return salarios.find((persona) => persona.name == nombre);
+}
+function extraerSalarios(nombre) {
+  const arrSalarios = encontrarPersona(nombre).trabajos.map(
+    (trabajos) => trabajos.salario
+  );
+  return arrSalarios;
+}
+function calcularMediana(nombre) {
+  const arrSalarios = extraerSalarios(nombre);
+  return encontrarMediana(arrSalarios).value;
+}
+function proyeccionSalarial(nombre) {
+  const arrSalarios = extraerSalarios(nombre);
 
-        const salariosCol = colombia.map(
-            function(person){
-                return person.salary;
-            }
-        )
+  const porcentajesCrecimiento = arrSalarios.reduce(
+    (acomulado, dato, index) => {
+      if (arrSalarios[index + 1] !== undefined) {
+        const diferencia = arrSalarios[index + 1] - dato;
+        const crecimiento = diferencia / dato;
 
-    /* Luego los organizamos con el metodo sort() como ya vimos en otros ejersicios. */
+        acomulado.push({ salario: arrSalarios[index + 1], crecimiento });
+      }
+      return acomulado;
+    },
+    []
+  );
 
-        const salariosColSorted = salariosCol.sort(
-            function(salaryA, salaryB){
-                return salaryA - salaryB;
-            }
-        );
-            console.log(salariosColSorted);
-    /* Hacemos una pequeña funcion que nos devuelve un boolean para saber si la lista es par */
+  const medianaCrecimiento = encontrarMediana(
+    porcentajesCrecimiento.map((dato) => dato.crecimiento)
+  );
 
-        function esPar(numero){
-        return ( numero % 2 === 0);
-        };
+  const proyeccion =
+    arrSalarios[arrSalarios.length - 1] +
+    arrSalarios[arrSalarios.length - 1] * medianaCrecimiento.value;
 
-    /* Traemos nuestro codigo que saca el promedio */
+  return proyeccion;
+}
+//! Conversion de estructura de la informacion
+function datosEmpresa() {
+  const nuevosDatos = salarios.reduce((acc, trabajador) => {
+    let nombreEmpleado = trabajador.name;
+    for (const valor of trabajador.trabajos) {
+      let salario = valor.salario;
+      let periodo = valor.year;
+      let empresa = valor.empresa;
 
-        function promediando (list){
-
-            const sumaDatos = list.reduce(
-
-                function(valorAcumulado, nuevoElemento){
-
-                    console.log("acumlado: " + valorAcumulado);
-
-                    console.log(" Elementos: "+ `${list}` + " ---> Elemento actual: " + nuevoElemento);
-
-                    return valorAcumulado + nuevoElemento;
-        
-                }
-            );
-
-            var mediaAritmetica = sumaDatos / list.length;
-            return mediaAritmetica
-        }
-
-    /* Esta es la formula de la mediana donde dependiendo si la lista es par o impar deberemos usar la funcion promedio */
-
-        function medianaSalarios (lista){
-            const mitad = parseInt(lista.length / 2);
-
-            if (esPar(lista.length)){
-                const personaMitad1 = lista[mitad - 1];
-                const personaMitad2 = lista[mitad];
-
-                const mediana = promediando([personaMitad1, personaMitad2]);
-
-                return mediana;
-
-            }else{
-                const personaMitad = lista[mitad];
-                return personaMitad;
-            }
-        }
-
-        const medianaGeneral = medianaSalarios(salariosColSorted);
-
-       
-
-/*Sacando el top 10% de los salarios */
-
-    const spliceStart = (salariosColSorted.length * 90) / 100;
-    const spliceCount = salariosColSorted.length - spliceStart;
-
-    console.log(spliceStart);
-    console.log(spliceCount);
-
-
-    const salariosTop10 = salariosColSorted.splice(spliceStart, spliceCount,);
-
-    console.log(salariosTop10);
-
-    const medianaTop10 = medianaSalarios(salariosTop10);
-
-    console.log({
-        medianaGeneral, medianaTop10
-
+      !acc[empresa]
+        ? (acc[empresa] = {
+            [periodo]: [{ nombre: nombreEmpleado, salario: salario }],
+          })
+        : !acc[empresa][periodo]
+        ? (acc[empresa][periodo] = [
+            { nombre: nombreEmpleado, salario: salario },
+          ])
+        : acc[empresa][periodo].push({
+            nombre: nombreEmpleado,
+            salario: salario,
+          });
     }
-    );
+    return acc;
+  }, {});
+  return nuevosDatos;
+}
+const baseDatos2 = datosEmpresa();
+console.log(baseDatos2);
+
+/* const empresas = {
+  mokepon: {
+    2018: [
+      { nombre: "juanita", salaraio: 1250 },
+      { nombre: "Solan", salario: 2500 },
+    ],
+    2019: [{ nombre: "Juan", salario: 2000 }],
+  },
+}; */
+
+function calcularMedianaEmpresa(nombre, año) {
+  if (!baseDatos2[nombre] || !baseDatos2[nombre][año]) {
+    return console.warn("No hay registros de esa empresa o ese año");
+  }
+
+  let salarios = baseDatos2[nombre][año].map((data) => data.salario);
+  let medianaSalarios = encontrarMediana(salarios).value;
+
+  return medianaSalarios;
+}
+
+/* console.log(calcularMedianaEmpresa("Freelance", 2023));*/
+function proyeccionEmpresa(nombre) {
+  let objEmpresa = baseDatos2[nombre];
+  let arrayMedianas = [];
+  for (const key in objEmpresa) {
+    arrayMedianas.push(calcularMedianaEmpresa(nombre, key));
+  }
+
+  const porcentajesCrecimiento = arrayMedianas.reduce(
+    (acomulado, dato, index) => {
+      if (arrayMedianas[index + 1] !== undefined) {
+        const diferencia = arrayMedianas[index + 1] - dato;
+        const crecimiento = diferencia / dato;
+
+        acomulado.push(crecimiento);
+      }
+      return acomulado;
+    },
+    []
+  );
+
+  const medianaCrecimiento = encontrarMediana(porcentajesCrecimiento);
+
+  const proyeccion =
+    arrayMedianas[arrayMedianas.length - 1] +
+    arrayMedianas[arrayMedianas.length - 1] * medianaCrecimiento.value;
+
+  return proyeccion;
+};
+
+/* console.log(proyeccionEmpresa("Freelance")); */

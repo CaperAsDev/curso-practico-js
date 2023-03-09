@@ -12,7 +12,6 @@ export function encontrarModa(listaDatosModa) {
       return objeto.dato === data;
     });
     let indexDato = 0;
-		console.log("dataExist: "+ dataExist);
     if (dataExist) {
       indexDato = acc.findIndex((element) => element.dato == data);
       acc[indexDato].veces++;
