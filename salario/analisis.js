@@ -4,17 +4,17 @@ import { promediando } from "../estadistica/promedio.js";
 
 function encontrarPersona(nombre) {
   return salarios.find((persona) => persona.name == nombre);
-}
+};
 function extraerSalarios(nombre) {
   const arrSalarios = encontrarPersona(nombre).trabajos.map(
     (trabajos) => trabajos.salario
   );
   return arrSalarios;
-}
+};
 function calcularMediana(nombre) {
   const arrSalarios = extraerSalarios(nombre);
   return encontrarMediana(arrSalarios).value;
-}
+};
 function proyeccionSalarial(nombre) {
   const arrSalarios = extraerSalarios(nombre);
 
@@ -40,7 +40,7 @@ function proyeccionSalarial(nombre) {
     arrSalarios[arrSalarios.length - 1] * medianaCrecimiento.value;
 
   return proyeccion;
-}
+};
 //! Conversion de estructura de la informacion
 function datosEmpresa() {
   const nuevosDatos = salarios.reduce((acc, trabajador) => {
@@ -66,7 +66,7 @@ function datosEmpresa() {
     return acc;
   }, {});
   return nuevosDatos;
-}
+};
 const baseDatos2 = datosEmpresa();
 console.log(baseDatos2);
 
@@ -89,7 +89,7 @@ function calcularMedianaEmpresa(nombre, año) {
   let medianaSalarios = encontrarMediana(salarios).value;
 
   return medianaSalarios;
-}
+};
 
 /* console.log(calcularMedianaEmpresa("Freelance", 2023));*/
 function proyeccionEmpresa(nombre) {
@@ -122,3 +122,19 @@ function proyeccionEmpresa(nombre) {
 };
 
 /* console.log(proyeccionEmpresa("Freelance")); */
+function medianaGeneral() {
+  const arrMedianas = salarios.map((persona) => calcularMediana(persona.name));
+  const medianaTotal = encontrarMediana(arrMedianas)
+  return medianaTotal;
+};
+
+function medianaTopTen(){
+  let medianaOrderedList =  medianaGeneral().orderedList;
+  let topTenLenght = Math.round(medianaOrderedList.length * 0.1);
+  let arrTopTen = medianaOrderedList.splice(medianaOrderedList.length-topTenLenght, topTenLenght);
+  let medianaTopTen = encontrarMediana(arrTopTen)
+  return medianaTopTen;
+};
+
+console.log(medianaTopTen());
+console.log(medianaGeneral());
